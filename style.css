@@ -17,6 +17,9 @@ button {
   letter-spacing: 0.4px;
   cursor: pointer;
 }
+main {
+  min-height: 65vh;
+}
 .nav {
   display: flex;
   background-color: #1a1a1a;
@@ -37,15 +40,19 @@ button {
   margin: 0 20px;
 }
 .main-header {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1.5rem 3rem;
   background-color: #e8e8e8;
   margin-bottom: 20px;
 }
-
+.main-header h2 {
+  font-size: 36px;
+}
 .section-container {
   width: 1000px;
-  margin: auto;
+  margin: 0px auto;
   /* background-color: aqua; */
   display: flex;
   flex-direction: column;
@@ -58,6 +65,7 @@ button {
   padding: 1rem 2rem;
   background-color: pink;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 .img-container {
   display: flex;
@@ -87,7 +95,7 @@ button {
   text-align: center;
   margin-bottom: 10px;
 }
-aside {
+.view-cart {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,4 +125,102 @@ footer {
   height: 25px;
   width: 25px;
   margin: 0 1rem;
+}
+
+/*ABOUT PAGE*/
+
+.about-container img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  float: left;
+  margin: 1rem;
+}
+.about-container p {
+  text-align: justify;
+}
+
+/* HOME page */
+.btn-album {
+  margin: 2rem 0;
+  padding: 5px 10px;
+  border: 2px solid #333;
+}
+.btn-play {
+  border: 2px solid #333;
+  padding: 5px;
+  height: 50px;
+  width: 50px;
+  font-size: x-large;
+  color: #333;
+  border-radius: 50%;
+}
+.tours-container {
+  width: 100%;
+}
+.tours-container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tours-container ul li {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #333;
+}
+.tour-date {
+  width: 20%;
+  font-weight: bold;
+}
+.tour-city {
+  width: 20%;
+}
+.tour-location {
+  width: 40%;
+}
+.tour-buy {
+  width: 20%;
+}
+
+/* CART */
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #eee;
+  padding: 1rem 1rem;
+  min-height: 80vh;
+  min-width: 40vh;
+  visibility: hidden;
+}
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.cart-body ul {
+  display: flex;
+  flex-direction: column;
+}
+.cart-header button {
+  background-color: orangered;
+  color: white;
+  font-weight: 500;
+}
+
+/* accessories */
+.toast {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 1rem 2rem;
+  background-color: #01c001;
+  color: white;
+  font-size: larger;
+  margin: 10px;
+  border-radius: 5px;
 }

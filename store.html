@@ -10,86 +10,97 @@
   <body>
     <nav class="nav">
       <ul class="nav-items">
-        <li><a href="#">HOME</a></li>
+        <li><a href="./home.html">HOME</a></li>
         <li><a href="#">STORE</a></li>
-        <li><a href="#">ABOUT</a></li>
+        <li><a href="./about.html">ABOUT</a></li>
       </ul>
-      <button>Cart</button>
+      <button class="open-cart">Cart</button>
     </nav>
+    <aside class="cart">
+      <div class="cart-header">
+        <h1>Cart</h1>
+        <button class="close-cart">✕</button>
+      </div>
+      <div class="cart-body">
+        <ul>
+          <!-- <li>item1</li> -->
+        </ul>
+      </div>
+    </aside>
     <header class="main-header"><h2>The Generics</h2></header>
-    <section class="section-container">
+    <section class="section-container" onclick="addToCart(event)">
       <h3 class="section-header">MUSIC</h3>
       <div class="img-container">
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Album 1</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="1">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Album 2</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="2">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Album 3</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="3">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Album 4</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="4">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Album 5</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="5">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Album 6</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="6">Add to Cart</button>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-container">
+    <section class="section-container" onclick="addToCart(event)">
       <h3 class="section-header">MERCH</h3>
       <div class="img-container">
         <div class="img">
@@ -100,7 +111,7 @@
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="7">Add to Cart</button>
           </div>
         </div>
         <div class="img">
@@ -111,7 +122,7 @@
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="8">Add to Cart</button>
           </div>
         </div>
         <div class="img">
@@ -122,7 +133,7 @@
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="9">Add to Cart</button>
           </div>
         </div>
         <div class="img">
@@ -133,12 +144,12 @@
           />
           <div class="img-action">
             <p>$10</p>
-            <button>Add to Cart</button>
+            <button id="10">Add to Cart</button>
           </div>
         </div>
       </div>
     </section>
-    <aside>
+    <aside class="view-cart">
       <button>View the cart</button>
     </aside>
     <footer>
@@ -173,4 +184,5 @@
       </div>
     </footer>
   </body>
+  <script src="main.js"></script>
 </html>
