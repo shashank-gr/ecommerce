@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+li {
+  text-decoration: none;
+  list-style: none;
+}
+button {
+  padding: 5px 15px;
+  background-color: #e8e8e8;
+  font-size: medium;
+  border: none;
+  border-radius: 2.5px;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+.nav {
+  display: flex;
+  background-color: #1a1a1a;
+  padding: 1rem 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.nav-items {
+  display: flex;
+  margin: 0 auto;
+}
+
+.nav-items a {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 20px;
+}
+.main-header {
+  text-align: center;
+  padding: 1.5rem 3rem;
+  background-color: #e8e8e8;
+  margin-bottom: 20px;
+}
+
+.section-container {
+  width: 1000px;
+  margin: auto;
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-header {
+  font-size: larger;
+  padding: 1rem 2rem;
+  background-color: pink;
+  border-radius: 10px;
+}
+.img-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.img {
+  padding: 2rem;
+}
+.img img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+.img-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: auto;
+}
+
+.img-heading {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+aside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+footer {
+  margin-top: 50px;
+  display: flex;
+  background-color: #e8e8e8;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-title {
+  width: 50%;
+}
+.footer-icons {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+.footer-icons ul {
+  display: flex;
+}
+.footer-icons ul li a img {
+  height: 25px;
+  width: 25px;
+  margin: 0 1rem;
+}
