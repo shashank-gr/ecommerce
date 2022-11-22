@@ -1,6 +1,6 @@
 const openCart = document.querySelector(".open-cart");
 const closeCart = document.querySelector(".close-cart");
-const cart = document.querySelector(".cart");
+const cart = document.querySelector(".cart-container");
 const cartBody = document.querySelector(".cart-body ul");
 const body = document.querySelector("body");
 
@@ -27,11 +27,45 @@ const updateTotal = (e) => {
 };
 
 const showCart = () => {
-  console.log("cliked");
+  // console.log("cliked");
+  const cartBackground = document.querySelector(".cart");
+  // cartBackground.style.visibility = "visible";
+  findTotal();
   cart.style.visibility = "visible";
 };
 const hideCart = () => {
+  const cartBackground = document.querySelector(".cart");
+  // cartBackground.style.visibility = "hidden";
   cart.style.visibility = "hidden";
+};
+const deleteCartItem = (e) => {
+  e.preventDefault();
+  if (e.target.className == "delete-item") {
+    e.target.parentElement.parentElement.parentElement.remove();
+    findTotal();
+    createToast("Item deleted from Cart");
+  }
+};
+const createToast = (msg) => {
+  const toast = document.createElement("div");
+  toast.innerText = msg;
+  toast.className = "toast";
+  body.insertAdjacentElement("beforeend", toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
+};
+
+const checkIfItemExistsInCart = (itemName) => {
+  const cartItems = document.querySelectorAll(".cart-item");
+  for (let i = 0; i < cartItems.length; i++) {
+    const name = cartItems[i].querySelector(".item-name").textContent;
+    if (name == itemName) {
+      return true;
+    }
+  }
+  return false;
 };
 
 const addToCart = (e) => {
@@ -43,29 +77,29 @@ const addToCart = (e) => {
       .textContent.replace("$", "");
     const itemQuantity = 1;
 
-    const itemRow = document.createElement("div");
-    itemRow.innerHTML = `<li class="item-name">${itemName}</li>
+    //check if it is in the cart
+    const itemExists = checkIfItemExistsInCart(itemName);
+    if (itemExists) {
+      return createToast("Product already present in the cart");
+    } else {
+      const itemRow = document.createElement("div");
+      itemRow.innerHTML = `<li class="item-name">${itemName}</li>
     <li class="item-price">${itemPrice}</li>
     <li class="item-quantity">
       <input type="number" class="quantity" value="1" />
+      <span><button class="delete-item">✕</button></span>
     </li>`;
-    itemRow.className = "cart-item";
+      itemRow.className = "cart-item";
 
-    const cartTable = document.querySelector(".cart-items");
-    cartTable.insertAdjacentElement("beforeend", itemRow);
+      const cartTable = document.querySelector(".cart-items");
+      cartTable.insertAdjacentElement("beforeend", itemRow);
 
-    //creating toast message
-    const toast = document.createElement("div");
-    toast.innerText = "Product added to cart";
-    toast.className = "toast";
-    body.insertAdjacentElement("beforeend", toast);
-
-    setTimeout(() => {
-      toast.remove();
-    }, 2000);
+      //creating toast message
+      createToast("Product added to Cart");
+      //calculate total after adding new element
+      findTotal();
+    }
   }
-  //calculate total after adding new element
-  findTotal();
 };
 openCart.addEventListener("click", showCart);
 closeCart.addEventListener("click", hideCart);
