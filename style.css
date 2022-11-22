@@ -20,8 +20,12 @@ button {
 main {
   min-height: 65vh;
 }
+input {
+  width: 40px;
+}
 .nav {
   display: flex;
+  height: 50px;
   background-color: #1a1a1a;
   padding: 1rem 2rem;
   justify-content: center;
@@ -94,6 +98,9 @@ main {
   width: 100%;
   text-align: center;
   margin-bottom: 10px;
+}
+.img-price {
+  font-weight: 500;
 }
 .view-cart {
   display: flex;
@@ -191,7 +198,7 @@ footer {
   right: 0;
   background-color: #eee;
   padding: 1rem 1rem;
-  min-height: 80vh;
+  min-height: 100vh;
   min-width: 40vh;
   visibility: hidden;
 }
@@ -201,17 +208,41 @@ footer {
   justify-content: space-between;
   margin-bottom: 1.5rem;
 }
-
-.cart-body ul {
+.cart-heading {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 .cart-header button {
   background-color: orangered;
   color: white;
   font-weight: 500;
 }
-
+.cart-total {
+  text-align: center;
+  margin-top: 20px;
+  padding: 1rem 2rem;
+  font-size: larger;
+  font-weight: 500;
+  background-color: #333;
+  color: white;
+}
+.cart-items div {
+  display: flex;
+  justify-content: space-between;
+}
+.item-name,
+.Item-name-heading {
+  width: 50%;
+}
+.item-price,
+.Item-price-heading {
+  width: 25%;
+}
+.item-quantity,
+.Item-quantity-heading {
+  width: 25%;
+}
 /* accessories */
 .toast {
   position: fixed;

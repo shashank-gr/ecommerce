@@ -22,10 +22,26 @@
         <button class="close-cart">✕</button>
       </div>
       <div class="cart-body">
-        <ul>
-          <!-- <li>item1</li> -->
-        </ul>
+        <div class="cart-items" onchange="updateTotal(event)">
+          <div
+            class="cart-item-heading"
+            style="margin-bottom: 20px; font-weight: 500"
+          >
+            <li class="Item-name-heading">Item</li>
+            <li class="Item-price-heading">Price ($)</li>
+            <li class="Item-quantity-heading">Quantity</li>
+          </div>
+          <!-- <div class="cart-item">
+            <li class="item-name">album1</li>
+            <li class="item-price">10</li>
+            <li class="item-quantity">
+              <input type="number" class="quantity" value="1" />
+            </li>
+          </div>
+          -->
+        </div>
       </div>
+      <div class="cart-total">Total: $0</div>
     </aside>
     <header class="main-header"><h2>The Generics</h2></header>
     <section class="section-container" onclick="addToCart(event)">
@@ -38,7 +54,7 @@
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$10</p>
             <button id="1">Add to Cart</button>
           </div>
         </div>
@@ -49,7 +65,7 @@
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$15</p>
             <button id="2">Add to Cart</button>
           </div>
         </div>
@@ -60,7 +76,7 @@
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$18</p>
             <button id="3">Add to Cart</button>
           </div>
         </div>
@@ -71,7 +87,7 @@
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$12</p>
             <button id="4">Add to Cart</button>
           </div>
         </div>
@@ -82,7 +98,7 @@
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$20</p>
             <button id="5">Add to Cart</button>
           </div>
         </div>
@@ -93,7 +109,7 @@
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$8</p>
             <button id="6">Add to Cart</button>
           </div>
         </div>
@@ -104,46 +120,46 @@
       <h3 class="section-header">MERCH</h3>
       <div class="img-container">
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Merch 1</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$15</p>
             <button id="7">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Merch 2</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$19</p>
             <button id="8">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Merch 3</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$20</p>
             <button id="9">Add to Cart</button>
           </div>
         </div>
         <div class="img">
-          <h3 class="img-heading">Image 1</h3>
+          <h3 class="img-heading">Merch 4</h3>
           <img
             src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"
             alt=""
           />
           <div class="img-action">
-            <p>$10</p>
+            <p class="img-price">$25</p>
             <button id="10">Add to Cart</button>
           </div>
         </div>
@@ -184,5 +200,5 @@
       </div>
     </footer>
   </body>
-  <script src="main.js"></script>
+  <script src="store.js"></script>
 </html>
