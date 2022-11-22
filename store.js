@@ -101,5 +101,35 @@ const addToCart = (e) => {
     }
   }
 };
+const displayProduct = ({ id, title, imageUrl, price }) => {
+  // console.log(id, title, imageUrl, price);
+  const imgContainer = document.querySelector(".img-container.music");
+  console.log(imgContainer);
+  const img = document.createElement("div");
+  img.className = "img";
+  img.innerHTML = ` <h3 class="img-heading">${title}</h3>
+  <img
+    src=${imageUrl}
+    alt="product image"
+  />
+  <div class="img-action">
+    <p class="img-price">$${price}</p>
+    <button id="${id}">Add to Cart</button>
+  </div>`;
+  imgContainer.insertAdjacentElement("beforeend", img);
+};
+
+const getProducts = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/products");
+    const products = response.data.products;
+    products.forEach((product) => {
+      displayProduct(product);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 openCart.addEventListener("click", showCart);
 closeCart.addEventListener("click", hideCart);
+document.addEventListener("DOMContentLoaded", getProducts);
