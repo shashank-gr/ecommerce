@@ -4,6 +4,13 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
 li {
   text-decoration: none;
   list-style: none;
@@ -247,6 +254,7 @@ footer {
 .cart-items div {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 .cart-item {
   padding-top: 5px;

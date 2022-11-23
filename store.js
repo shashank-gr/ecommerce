@@ -4,6 +4,7 @@ const cart = document.querySelector(".cart-container");
 const cartBody = document.querySelector(".cart-body ul");
 const body = document.querySelector("body");
 
+//simple dom manipulation to find total
 const findTotal = () => {
   const cartItems = document.querySelectorAll(".cart-item");
   let total = 0;
@@ -16,34 +17,86 @@ const findTotal = () => {
   document.querySelector(".cart-total").textContent = `Total ($) : ${total}`;
 };
 
-const updateTotal = (e) => {
-  const quantity = document.querySelectorAll(".quantity");
-  for (let i = 0; i < quantity.length; i++) {
-    if (quantity[i].value <= 0) {
-      quantity[i].value = 1;
+//change event on quantity of cart item
+const updateTotal = async (e) => {
+  try {
+    const cartItemId = e.target.parentElement.querySelector(".cartItem-id").id;
+    const quantity = e.target.parentElement.querySelector(".quantity");
+    if (quantity.value <= 0) {
+      quantity.value = 1;
     }
+    const response = await axios.post("http://localhost:3000/updateCart", {
+      cartItemId,
+      quantity: quantity.value,
+    });
+    console.log(response.status);
+    if (response.status == 200) {
+      findTotal();
+    }
+  } catch (err) {
+    console.log(err);
   }
-  findTotal();
 };
 
-const showCart = () => {
-  // console.log("cliked");
-  const cartBackground = document.querySelector(".cart");
-  // cartBackground.style.visibility = "visible";
-  findTotal();
-  cart.style.visibility = "visible";
+//displaying each cart item on front end
+const createItemInCart = ({ cartItem: { id, quantity }, price, title }) => {
+  const itemRow = document.createElement("div");
+  itemRow.innerHTML = `<li class="item-name">${title}</li>
+    <li class="item-price">${price}</li>
+    <li class="item-quantity">
+      <input type="number" class="quantity" min="1" value=${quantity} />
+      <span><button class="delete-item">✕</button></span>
+      <input type="hidden" class="cartItem-id" id=${id} />
+    </li>`;
+  itemRow.className = "cart-item";
+
+  const cartTable = document.querySelector(".cart-items");
+  cartTable.insertAdjacentElement("beforeend", itemRow);
+};
+
+//getting the cart items from backend
+const showCart = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/cart");
+    console.log(response.data);
+    const cartItems = response.data;
+    //to remove existing cart to append new cart got from backend
+    document.querySelectorAll(".cart-item").forEach((e) => e.remove());
+
+    cartItems.forEach((cartItem) => {
+      createItemInCart(cartItem);
+    });
+    findTotal();
+  } catch (err) {
+    console.log(err);
+  }
+  document.querySelector(".cart-container").style.visibility = "visible";
 };
 const hideCart = () => {
-  const cartBackground = document.querySelector(".cart");
-  // cartBackground.style.visibility = "hidden";
-  cart.style.visibility = "hidden";
+  document.querySelector(".cart-container").style.visibility = "hidden";
 };
-const deleteCartItem = (e) => {
+const deleteCartItem = async (e) => {
   e.preventDefault();
   if (e.target.className == "delete-item") {
-    e.target.parentElement.parentElement.parentElement.remove();
-    findTotal();
-    createToast("Item deleted from Cart");
+    try {
+      const cartItemId =
+        e.target.parentElement.parentElement.querySelector(".cartItem-id").id;
+      const response = await axios.post(
+        "http://localhost:3000/cart-delete-item",
+        {
+          cartItemId,
+        }
+      );
+      console.log(response);
+      if (response.status == "200") {
+        console.log(response.data.msg);
+        e.target.parentElement.parentElement.parentElement.remove();
+        findTotal();
+        createToast("Item deleted from Cart");
+      }
+    } catch (err) {
+      console.log(err.data.msg);
+    }
   }
 };
 const createToast = (msg) => {
@@ -68,51 +121,33 @@ const checkIfItemExistsInCart = (itemName) => {
   return false;
 };
 
+//adding the product to the cart in the backend
 const addToCart = async (e) => {
   if (e.target.tagName == "BUTTON") {
     const parent = e.target.parentElement.parentElement;
     const itemName = parent.querySelector(".img-heading").textContent;
-    const itemPrice = parent
-      .querySelector(".img-price")
-      .textContent.replace("$", "");
-    const itemQuantity = 1;
     const productId = e.target.id;
-    // console.log(productId);
-
-    //make a post request;
-    try {
-      const response = await axios.post("http://localhost:3000/cart", {
-        productId,
-      });
-      console.log(response.data.msg);
-    } catch (err) {
-      console.log(response.data.msg);
-    }
 
     // check if it is in the cart
     const itemExists = checkIfItemExistsInCart(itemName);
     if (itemExists) {
       return createToast("Product already present in the cart");
     } else {
-      const itemRow = document.createElement("div");
-      itemRow.innerHTML = `<li class="item-name">${itemName}</li>
-    <li class="item-price">${itemPrice}</li>
-    <li class="item-quantity">
-      <input type="number" class="quantity" value="1" />
-      <span><button class="delete-item">✕</button></span>
-    </li>`;
-      itemRow.className = "cart-item";
-
-      const cartTable = document.querySelector(".cart-items");
-      cartTable.insertAdjacentElement("beforeend", itemRow);
-
-      //creating toast message
-      createToast("Product added to Cart");
-      //calculate total after adding new element
-      findTotal();
+      try {
+        const response = await axios.post("http://localhost:3000/cart", {
+          productId,
+        });
+        console.log(response.data.msg);
+        createToast("Product added to the cart");
+        showCart();
+      } catch (err) {
+        console.log(response.data.msg);
+      }
     }
   }
 };
+
+//to display each individual product on screen
 const displayProduct = ({ id, title, imageUrl, price }) => {
   // console.log(id, title, imageUrl, price);
   const imgContainer = document.querySelector(".img-container.music");
@@ -131,6 +166,7 @@ const displayProduct = ({ id, title, imageUrl, price }) => {
   imgContainer.insertAdjacentElement("beforeend", img);
 };
 
+//to get all the products from backend
 const getProducts = async () => {
   try {
     const response = await axios.get("http://localhost:3000/products");
