@@ -68,7 +68,7 @@ const checkIfItemExistsInCart = (itemName) => {
   return false;
 };
 
-const addToCart = (e) => {
+const addToCart = async (e) => {
   if (e.target.tagName == "BUTTON") {
     const parent = e.target.parentElement.parentElement;
     const itemName = parent.querySelector(".img-heading").textContent;
@@ -76,8 +76,20 @@ const addToCart = (e) => {
       .querySelector(".img-price")
       .textContent.replace("$", "");
     const itemQuantity = 1;
+    const productId = e.target.id;
+    // console.log(productId);
 
-    //check if it is in the cart
+    //make a post request;
+    try {
+      const response = await axios.post("http://localhost:3000/cart", {
+        productId,
+      });
+      console.log(response.data.msg);
+    } catch (err) {
+      console.log(response.data.msg);
+    }
+
+    // check if it is in the cart
     const itemExists = checkIfItemExistsInCart(itemName);
     if (itemExists) {
       return createToast("Product already present in the cart");
@@ -104,7 +116,7 @@ const addToCart = (e) => {
 const displayProduct = ({ id, title, imageUrl, price }) => {
   // console.log(id, title, imageUrl, price);
   const imgContainer = document.querySelector(".img-container.music");
-  console.log(imgContainer);
+  // console.log(imgContainer);
   const img = document.createElement("div");
   img.className = "img";
   img.innerHTML = ` <h3 class="img-heading">${title}</h3>
