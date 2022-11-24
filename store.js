@@ -165,15 +165,51 @@ const displayProduct = ({ id, title, imageUrl, price }) => {
   </div>`;
   imgContainer.insertAdjacentElement("beforeend", img);
 };
-
+const changePage = (e) => {
+  if (e.target.tagName == "BUTTON") {
+    const pageNum = e.target.textContent;
+    console.log(pageNum);
+    getProducts(pageNum);
+  }
+};
+const displayPagination = ({
+  currentPage,
+  hasNextPage,
+  hasPreviousPage,
+  nextPage,
+  previousPage,
+  lastPage,
+}) => {
+  const pagination = document.querySelector(".pagination");
+  if (hasNextPage && hasPreviousPage) {
+    pagination.innerHTML = ` <button >${previousPage}</button>
+    <button class="active">${currentPage}</button>
+    <button >${nextPage}</button>`;
+  } else if (!hasPreviousPage && hasNextPage) {
+    pagination.innerHTML = `<button class="active">${currentPage}</button>
+    <button >${nextPage}</button>`;
+  } else if (!hasNextPage) {
+    pagination.innerHTML = `<button>${previousPage}</button>
+    <button class="active">${currentPage}</button>`;
+  } else if (!hasNextPage && !hasPreviousPage) {
+    pagination.innerHTML = `<button class="active">${previousPage}</button>`;
+  }
+};
 //to get all the products from backend
-const getProducts = async () => {
+const getProducts = async (page = 1) => {
   try {
-    const response = await axios.get("http://localhost:3000/products");
+    const response = await axios.get(
+      `http://localhost:3000/products/?page=${page}`
+    );
     const products = response.data.products;
+    const pagination = response.data.pagination;
+    const imgContainer = document.querySelector(".img-container.music");
+    imgContainer.innerHTML = "";
     products.forEach((product) => {
       displayProduct(product);
     });
+    console.log(pagination);
+    displayPagination(pagination);
   } catch (err) {
     console.log(err);
   }
