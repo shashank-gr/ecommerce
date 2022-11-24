@@ -27,7 +27,11 @@ const getOrders = async () => {
     const orders = await axios.get("http://localhost:3000/orders");
     // document.querySelector("main").textContent = orders;
     console.log(orders);
-    getEachOrder(orders.data);
+    if (orders.status == 201) {
+      console.log(orders.data.msg);
+    } else {
+      getEachOrder(orders.data);
+    }
   } catch (err) {
     console.log(err);
   }
