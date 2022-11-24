@@ -8,6 +8,7 @@ const createOrder = async (e) => {
   try {
     const response = await axios.post("http://localhost:3000/orders", {});
     // console.log(response.data.msg);
+    hideCart();
     createToast(response.data.msg);
   } catch (error) {
     // console.log(error);
