@@ -6,7 +6,7 @@ const body = document.querySelector("body");
 
 const createOrder = async (e) => {
   try {
-    const response = await axios.post("http://localhost:3000/orders", {});
+    const response = await axios.post("http://13.233.255.73:3000/orders", {});
     // console.log(response.data.msg);
     hideCart();
     createToast(response.data.msg);
@@ -37,7 +37,7 @@ const updateTotal = async (e) => {
     if (quantity.value <= 0) {
       quantity.value = 1;
     }
-    const response = await axios.post("http://localhost:3000/updateCart", {
+    const response = await axios.post("http://13.233.255.73:3000/updateCart", {
       cartItemId,
       quantity: quantity.value,
     });
@@ -69,7 +69,7 @@ const createItemInCart = ({ cartItem: { id, quantity }, price, title }) => {
 //getting the cart items from backend
 const showCart = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/cart");
+    const response = await axios.get("http://13.233.255.73:3000/cart");
     console.log(response.data);
     const cartItems = response.data;
     //to remove existing cart to append new cart got from backend
@@ -87,6 +87,7 @@ const showCart = async () => {
 const hideCart = () => {
   document.querySelector(".cart-container").style.visibility = "hidden";
 };
+//deleting cart item
 const deleteCartItem = async (e) => {
   e.preventDefault();
   if (e.target.className == "delete-item") {
@@ -94,7 +95,7 @@ const deleteCartItem = async (e) => {
       const cartItemId =
         e.target.parentElement.parentElement.querySelector(".cartItem-id").id;
       const response = await axios.post(
-        "http://localhost:3000/cart-delete-item",
+        "http://13.233.255.73:3000/cart-delete-item",
         {
           cartItemId,
         }
@@ -111,6 +112,7 @@ const deleteCartItem = async (e) => {
     }
   }
 };
+//to create a toast message
 const createToast = (msg) => {
   const toast = document.createElement("div");
   toast.innerText = msg;
@@ -146,7 +148,7 @@ const addToCart = async (e) => {
       return createToast("Product already present in the cart");
     } else {
       try {
-        const response = await axios.post("http://localhost:3000/cart", {
+        const response = await axios.post("http://13.233.255.73:3000/cart", {
           productId,
         });
         console.log(response.data.msg);
@@ -211,7 +213,7 @@ const displayPagination = ({
 const getProducts = async (page = 1) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/products/?page=${page}`
+      `http://13.233.255.73:3000/products/?page=${page}`
     );
     const products = response.data.products;
     const pagination = response.data.pagination;
